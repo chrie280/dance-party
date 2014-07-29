@@ -1,9 +1,10 @@
 var Dancer = function(top, left, timeBetweenSteps) {
   this.$node = $('<img class="dancer"></img>');
+  this.$node.draggable();
   this.timeBetweenSteps = timeBetweenSteps;
   this.step();
   this.setPosition(top, left);
-  this.getAtMe();
+  setTimeout(this.getAtMe.bind(this), 1000);
 };
 
 Dancer.prototype.step = function() {
@@ -19,23 +20,15 @@ Dancer.prototype.setPosition = function(top, left) {
   this.$node.css(styleSettings);
 };
 Dancer.prototype.getAtMe = function(){
-  for (var i = 0; i<window.dancers.length; i++){
+  for (var i = 0; i < window.dancers.length; i++){
     if (!(this instanceof dancers[i].constructor)){
-      if (Math.abs(this.$node.offset().top - dancers[i].$node.offset().top) < 300){
-        var height = $('body').height() * .8;
-        var width = $('body').width();
-        this.setPosition(height, width * .4);
-        dancers[i].setPosition(height, width * .6);
-        var lineUp = function(){
-          var intervalWidth = $("body").width() / dancers.length;
-          var dancerHeight = $("body").height()*0.55;
-          // iterate over dancers array
-          for (var j = 0; j < dancers.length-1; j++) {
-            if (j !== i){
-              dancers[j].setPosition(dancerHeight, intervalWidth*j);
-            }
-          }
-        }();
+      var yDiff = Math.abs(this.$node.offset().top - dancers[i].$node.offset().top);
+      var xDiff = Math.abs(this.$node.offset().left - dancers[i].$node.offset().left);
+      console.log(yDiff);
+      console.log(xDiff);
+
+      if (yDiff < 100 && xDiff < 150){
+        timeToStep(dancers.length - 1, i);
       }
     }
   }

@@ -1,16 +1,34 @@
 $(document).ready(function(){
   window.dancers = [];
-  $(".lineUpButton").on("click", function(event){
+
+  window.timeToStep = function(combatantOneIndex, combatantTwoIndex){
+    var height = $('body').height() * 0.8;
+    var width = $('body').width();
+    var combatantOne = dancers[combatantOneIndex];
+    var combatantTwo = dancers[combatantTwoIndex];
+
+    combatantOne.setPosition(height, width * 0.35);
+    combatantTwo.setPosition(height, width * 0.55);
+
+    window.lineEmUp(combatantOneIndex, combatantTwoIndex);
+
+  };
+
+  window.lineEmUp = function (skipOne, skipTwo){
     // get length of dancers
     // use lengh to build width interval (body width/dancers length)
     var intervalWidth = $("body").width() / dancers.length;
     var dancerHeight = $("body").height()*0.55;
     // iterate over dancers array
     for (var i = 0; i < dancers.length; i++) {
-      // call setPosition with fixed height & width interval
-      dancers[i].setPosition(dancerHeight, intervalWidth*i);
+      if (i !== skipOne && i !== skipTwo) {
+        // call setPosition with fixed height & width interval
+        dancers[i].setPosition(dancerHeight, intervalWidth*i);
+      }
     }
-  });
+  };
+
+  $(".lineUpButton").on("click", lineEmUp);
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
