@@ -29,15 +29,13 @@ Dancer.prototype.getAtMe = function(){
       console.log(xDiff);
 
       if (yDiff < 100 && xDiff < 150){
+        $('.danceOff').toggle("pulsate", 1200, function(){
+          $('.danceOff').toggle("pulsate", 1200);
+        });
         window.danceFloor.timeToStep(dancers.length - 1, i);
       }
     }
   }
 };
-//on invocation
-//iterate through dancer array
-  //if type === different
-  //check distance
-  //  //if distance < limit
-  //    DANCE OFF MOFO
+
 
