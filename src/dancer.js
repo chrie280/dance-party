@@ -29,7 +29,7 @@ Dancer.prototype.getAtMe = function(){
       console.log(xDiff);
 
       if (yDiff < 100 && xDiff < 150){
-        timeToStep(dancers.length - 1, i);
+        window.danceFloor.timeToStep(dancers.length - 1, i);
       }
     }
   }

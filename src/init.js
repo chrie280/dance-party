@@ -1,30 +1,34 @@
 $(document).ready(function(){
   window.dancers = [];
+  window.danceFloor = new DanceFloor();
 
-  window.timeToStep = function(combatantOneIndex, combatantTwoIndex){
-    var height = $('body').height() * 0.8;
-    var width = $('body').width();
-    var combatantOne = dancers[combatantOneIndex];
-    var combatantTwo = dancers[combatantTwoIndex];
+  // window.timeToStep = function(combatantOneIndex, combatantTwoIndex){
+  //   var height = $('body').height() * 0.8;
+  //   var width = $('body').width();
+  //   var combatantOne = dancers[combatantOneIndex];
+  //   var combatantTwo = dancers[combatantTwoIndex];
 
-    combatantOne.setPosition(height, width * 0.35);
-    combatantTwo.setPosition(height, width * 0.55);
+  //   combatantOne.setPosition(height, width * 0.35);
+  //   combatantTwo.setPosition(height, width * 0.55);
 
-    window.lineEmUp(combatantOneIndex, combatantTwoIndex);
+  //   window.lineEmUp(combatantOneIndex, combatantTwoIndex);
 
-  };
+  // };
 
-  window.lineEmUp = function (skipOne, skipTwo){
-    var intervalWidth = $("body").width() / dancers.length;
-    var dancerHeight = $("body").height()*0.55;
-    for (var i = 0; i < dancers.length; i++) {
-      if (i !== skipTwo && i!==skipOne) {
-        dancers[i].$node.animate({top:dancerHeight + 'px', left: intervalWidth*i + 'px'}, 2000, 'easeInBounce');
-      }
-    }
-  };
-
-  $(".lineUpButton").on("click", lineEmUp);
+  // window.lineEmUp = function (skipOne, skipTwo){
+  //   var intervalWidth = $("body").width() / dancers.length;
+  //   var dancerHeight = $("body").height()*0.55;
+  //   for (var i = 0; i < dancers.length; i++) {
+  //     if (i !== skipTwo && i!==skipOne) {
+  //       dancers[i].$node.animate({top:dancerHeight + 'px', left: intervalWidth*i + 'px'}, 2000, 'easeOutCirc');
+  //     }
+  //   }
+  // };
+  $(".floorSelector").on("change", function(){
+    var floorFunction = window[$(this).val()];
+    window.danceFloor = new floorFunction();
+  })
+  $(".lineUpButton").on("click", danceFloor.LineEmUp);
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
