@@ -21,11 +21,26 @@ body, a:link, a:visited, a:active{
   background-color: #777;
 }
 .dancer{
-  border:10px solid red;
-  border-radius:10px;
+  /*border:10px solid red;*/
+  /*border-radius:10px;*/
   position:absolute;
   max-height: 40%;
   display: inline;
+
+}
+@-webkit-keyframes spin {
+  100% {-webkit-transform: rotate(360deg);}
+}
+@keyframes spin {
+  100% {transform: rotate(360deg);}
+}
+@-webkit-keyframes hop {
+  from {-webkit-transform: translate(0px,0px)}
+  to {-webkit-transform: translate(0px, -50px)}
+}
+@-webkit-keyframes twist {
+  from {-webkit-transform: scaleX(1);}
+  to {-webkit-transform: scaleX(-1);}
 }
 /*.dancer .overlay{
   position: relative;

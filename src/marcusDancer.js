@@ -7,5 +7,10 @@ Marcus.prototype.constructor = Marcus;
 Marcus.prototype.oldStep = Marcus.prototype.step;
 Marcus.prototype.step = function(){
   this.oldStep();
-  this.$node.fadeToggle(this.timeBetweenSteps);
+  var timeInSec = Math.max(this.timeBetweenSteps/300, .3);
+  var danceMoves = {
+    '-webkit-animation': 'spin ' +timeInSec +'s linear infinite',
+    'animation' : 'spin ' +timeInSec + 's linear infinite'
+  };
+  this.$node.css(danceMoves);
 };
