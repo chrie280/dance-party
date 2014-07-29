@@ -1,5 +1,5 @@
 var Dancer = function(top, left, timeBetweenSteps) {
-  this.$node = $('<span class="dancer"></span>');
+  this.$node = $('<img class="dancer"></img>');
   this.timeBetweenSteps = timeBetweenSteps;
   this.step();
   this.setPosition(top, left);
@@ -7,7 +7,7 @@ var Dancer = function(top, left, timeBetweenSteps) {
 
 Dancer.prototype.step = function() {
   var that = this;
-  setTimeout(this.step.bind(that), this.timeBetweenSteps);
+  setTimeout(function(){that.step();}, this.timeBetweenSteps);
 };
 
 Dancer.prototype.setPosition = function(top, left) {
