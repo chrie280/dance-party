@@ -1,5 +1,16 @@
 $(document).ready(function(){
   window.dancers = [];
+  $(".lineUpButton").on("click", function(event){
+    // get length of dancers
+    // use lengh to build width interval (body width/dancers length)
+    var intervalWidth = $("body").width() / dancers.length;
+    var dancerHeight = $("body").height()*0.55;
+    // iterate over dancers array
+    for (var i = 0; i < dancers.length; i++) {
+      // call setPosition with fixed height & width interval
+      dancers[i].setPosition(dancerHeight, intervalWidth*i);
+    }
+  });
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer

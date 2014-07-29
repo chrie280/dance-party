@@ -42,6 +42,10 @@ body, a:link, a:visited, a:active{
   from {-webkit-transform: scaleX(1);}
   to {-webkit-transform: scaleX(-1);}
 }
+@-webkit-keyframes move {
+  from{-webkit-transform: rotate(0deg) translate(-40px) rotate(0deg)}
+  to {-webkit-transform: rotate(180deg) translate(-40px) rotate(-180deg)}
+}
 /*.dancer .overlay{
   position: relative;
   top: 0;

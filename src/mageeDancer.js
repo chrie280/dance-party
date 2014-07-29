@@ -7,5 +7,10 @@ Magee.prototype.constructor = Magee;
 Magee.prototype.oldStep = Magee.prototype.step;
 Magee.prototype.step = function(){
   this.oldStep();
-  this.$node.fadeToggle(this.timeBetweenSteps);
+  var interval = Math.max(this.timeBetweenSteps/1000, .4);
+   var danceMoves = {
+    '-webkit-animation' : 'move ' + interval +'s alternate infinite',
+    'animation' : 'move ' + interval +'s alternate infinite'
+     };
+  this.$node.css(danceMoves);
 };
