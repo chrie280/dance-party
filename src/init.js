@@ -15,15 +15,11 @@ $(document).ready(function(){
   };
 
   window.lineEmUp = function (skipOne, skipTwo){
-    // get length of dancers
-    // use lengh to build width interval (body width/dancers length)
     var intervalWidth = $("body").width() / dancers.length;
     var dancerHeight = $("body").height()*0.55;
-    // iterate over dancers array
     for (var i = 0; i < dancers.length; i++) {
-      if (i !== skipOne && i !== skipTwo) {
-        // call setPosition with fixed height & width interval
-        dancers[i].setPosition(dancerHeight, intervalWidth*i);
+      if (i !== skipTwo && i!==skipOne) {
+        dancers[i].$node.animate({top:dancerHeight + 'px', left: intervalWidth*i + 'px'}, 2000, 'easeInBounce');
       }
     }
   };
@@ -52,8 +48,8 @@ $(document).ready(function(){
     // make a dancer with a random position
 
     var dancer = new dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+      ($("body").height() * .85) * Math.random(),
+      ($("body").width() * .85)* Math.random(),
       Math.random() * 1000
     );
     $('body').append(dancer.$node);

@@ -14,6 +14,7 @@ Dancer.prototype.step = function() {
 
 Dancer.prototype.setPosition = function(top, left) {
   var styleSettings = {
+    position: 'fixed',
     top: top,
     left: left
   };
