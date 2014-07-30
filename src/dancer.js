@@ -20,22 +20,23 @@ Dancer.prototype.setPosition = function(top, left) {
   };
   this.$node.css(styleSettings);
 };
+
 Dancer.prototype.getAtMe = function(){
   for (var i = 0; i < window.dancers.length; i++){
     if (!(this instanceof dancers[i].constructor)){
       var yDiff = Math.abs(this.$node.offset().top - dancers[i].$node.offset().top);
       var xDiff = Math.abs(this.$node.offset().left - dancers[i].$node.offset().left);
-      console.log(yDiff);
-      console.log(xDiff);
-
       if (yDiff < 100 && xDiff < 150){
         $('.danceOff').toggle("pulsate", 1200, function(){
           $('.danceOff').toggle("pulsate", 1200);
         });
         window.danceFloor.timeToStep(dancers.length - 1, i);
+        return;
       }
     }
   }
 };
 
-
+Dancer.prototype.bustMove = function(effectName, options, duration) {
+  $(this.$node).effect(effectName, options, duration);
+}

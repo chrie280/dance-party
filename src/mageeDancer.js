@@ -1,6 +1,7 @@
 var Magee = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
-  this.$node.attr('src', 'img/magee.png')
+  this.$node.attr('src', 'img/magee.png');
+  this.preferences = ['Magee', 'Phillip', 'Marcus', 'Fred'];
 };
 Magee.prototype = Object.create(Dancer.prototype);
 Magee.prototype.constructor = Magee;

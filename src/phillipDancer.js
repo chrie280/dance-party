@@ -1,7 +1,8 @@
 var Phillip = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
-  this.$node.attr('src', 'img/phillip.png')
-  this.top = top;
+  this.$node.attr('src', 'img/phillip.png');
+  this.preferences = ['Phillip', 'Magee', 'Marcus', 'Fred'];
+  // this.top = top;
 };
 Phillip.prototype = Object.create(Dancer.prototype);
 Phillip.prototype.constructor = Phillip;

@@ -1,6 +1,7 @@
 var Fred = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
    this.$node.attr('src', 'img/fred.png');
+   this.preferences = ['Fred', 'Phillip', 'Magee', 'Marcus'];
 };
 Fred.prototype = Object.create(Dancer.prototype);
 Fred.prototype.constructor = Fred;

@@ -17,7 +17,29 @@ DanceFloor.prototype.timeToStep = function(combatantOneIndex, combatantTwoIndex)
     top: height + 'px',
     left: width * 0.55 + 'px'},
     this.lineUpDelay * .5, this.lineUpAnimation);
+
   this.lineEmUp(combatantOneIndex, combatantTwoIndex);
+  setTimeout(function(){
+    combatantOne.bustMove("bounce", {distance: 250}, 400)}
+  ,3000);
+  setTimeout(function(){
+    combatantTwo.bustMove("shake", {distance: 150}, 400);}
+  ,4000);
+  setTimeout(function(){
+    combatantOne.bustMove("bounce", {distance: 400}, 800)}
+  ,5000);
+  setTimeout(function(){
+    combatantTwo.bustMove("shake", {distance: 300}, 800);}
+  ,6000);
+  setTimeout(function(){
+    combatantOne.bustMove("bounce", {distance: 700}, 1600)}
+  ,7000);
+  setTimeout(function(){
+    combatantTwo.bustMove("shake", {distance: 600}, 1400);}
+  ,8500);
+  setTimeout(function(){
+    this.tallyVotes(combatantOne, combatantTwo)}
+  ,10000);
 };
 
 DanceFloor.prototype.lineEmUp = function(skipOne, skipTwo){
@@ -32,5 +54,28 @@ DanceFloor.prototype.lineEmUp = function(skipOne, skipTwo){
     }
   }
 };
+
+DanceFloor.prototype.tallyVotes = function(combatantOne, combatantTwo) {
+  var oneVotes = 0;
+  var twoVotes = 0;
+  window.dancers.forEach(function(dancer){
+    for (var i = 0; i < 4; i++) {
+      if (dancer.preferences[i] === combatantOne.preferences[0]) {
+        oneVotes++;
+        break;
+      }
+      if (dancer.preferences[i] === combatantTwo.preferences[0]) {
+        twoVotes++;
+        break;
+      }
+    }
+  });
+  return oneVotes > twoVotes? [combatantOne, combatantTwo] : [combatantTwo, combatantOne];
+};
+
+
+
+
+
 
 
