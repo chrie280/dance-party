@@ -5,6 +5,7 @@ var Dancer = function(top, left, timeBetweenSteps) {
   this.step();
   this.setPosition(top, left);
   setTimeout(this.getAtMe.bind(this), 1000);
+  this.bustCount = 1;
 };
 
 Dancer.prototype.step = function() {
@@ -22,21 +23,22 @@ Dancer.prototype.setPosition = function(top, left) {
 };
 
 Dancer.prototype.getAtMe = function(){
-  for (var i = 0; i < window.dancers.length; i++){
+  for (var i = 0; i < dancers.length; i++){
     if (!(this instanceof dancers[i].constructor)){
       var yDiff = Math.abs(this.$node.offset().top - dancers[i].$node.offset().top);
       var xDiff = Math.abs(this.$node.offset().left - dancers[i].$node.offset().left);
-      if (yDiff < 100 && xDiff < 150){
+      if (yDiff < 75 && xDiff < 100){
         $('.danceOff').toggle("pulsate", 1200, function(){
           $('.danceOff').toggle("pulsate", 1200);
         });
-        window.danceFloor.timeToStep(dancers.length - 1, i);
+        danceFloor.timeToStep(dancers.indexOf(this), i);
         return;
       }
     }
   }
 };
 
-Dancer.prototype.bustMove = function(effectName, options, duration) {
-  $(this.$node).effect(effectName, options, duration);
+Dancer.prototype.bustMove = function(effectName, optionVal, duration) {
+  $(this.$node).effect(effectName, {distance : (optionVal * this.bustCount)}, duration * this.bustCount);
+  this.bustCount++;
 }

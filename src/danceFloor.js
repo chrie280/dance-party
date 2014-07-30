@@ -1,9 +1,10 @@
 var DanceFloor = function() {
-  this.$body = $("body");
+  this.$body = $('body');
 
 };
 
 DanceFloor.prototype.timeToStep = function(combatantOneIndex, combatantTwoIndex){
+  $('.music').attr('src', 'audio/danceOff.mp3');
   var height = $('body').height() * 0.80;
   var width = $('body').width();
   var combatantOne = dancers[combatantOneIndex];
@@ -12,45 +13,43 @@ DanceFloor.prototype.timeToStep = function(combatantOneIndex, combatantTwoIndex)
   combatantOne.$node.animate({
     top: height + 'px',
     left: width * 0.35 + 'px'},
-    this.lineUpDelay * .5, this.lineUpAnimation);
+    this.lineUpDelay * .1, this.lineUpAnimation);
   combatantTwo.$node.animate({
     top: height + 'px',
     left: width * 0.55 + 'px'},
-    this.lineUpDelay * .5, this.lineUpAnimation);
+    this.lineUpDelay * .1, this.lineUpAnimation);
 
   this.lineEmUp(combatantOneIndex, combatantTwoIndex);
   setTimeout(function(){
-    combatantOne.bustMove("bounce", {distance: 250}, 400)}
-  ,3000);
+    combatantOne.bustMove('bounce', 200, 350);
+  },3000);
   setTimeout(function(){
-    combatantTwo.bustMove("shake", {distance: 150}, 400);}
-  ,4000);
+    combatantTwo.bustMove('shake', 125, 350);
+  },3500);
   setTimeout(function(){
-    combatantOne.bustMove("bounce", {distance: 400}, 800)}
-  ,5000);
+    combatantOne.bustMove('bounce', 200, 350);
+  },5000);
   setTimeout(function(){
-    combatantTwo.bustMove("shake", {distance: 300}, 800);}
-  ,6000);
+    combatantTwo.bustMove('shake', 125, 350);
+  },6000);
   setTimeout(function(){
-    combatantOne.bustMove("bounce", {distance: 700}, 1600)}
-  ,7000);
+    combatantOne.bustMove('bounce', 200, 350);
+  },7000);
   setTimeout(function(){
-    combatantTwo.bustMove("shake", {distance: 600}, 1400);}
-  ,8500);
-  setTimeout(function(){
-    this.tallyVotes(combatantOne, combatantTwo)}
-  ,10000);
+    combatantTwo.bustMove('shake', 125, 350);
+  },8500);
+  setTimeout(this.tallyVotes.bind(this, combatantOne, combatantTwo), 10000);
 };
 
 DanceFloor.prototype.lineEmUp = function(skipOne, skipTwo){
   var animation = this.lineUpAnimation;
   var delay = this.lineUpDelay;
   var heightOffset = this.yOffset;
-  var intervalWidth = $("body").width() / dancers.length;
-  var dancerHeight = $("body").height()*heightOffset;
+  var intervalWidth = $('body').width() / window.dancers.length;
+  var dancerHeight = $('body').height()*heightOffset;
   for (var i = 0; i < dancers.length; i++) {
     if (i !== skipTwo && i!==skipOne) {
-      dancers[i].$node.animate({top:dancerHeight + 'px', left: intervalWidth*i + 'px'}, delay, animation);
+      window.dancers[i].$node.animate({top:dancerHeight + 'px', left: intervalWidth*i + 'px'}, delay, animation);
     }
   }
 };
@@ -70,8 +69,20 @@ DanceFloor.prototype.tallyVotes = function(combatantOne, combatantTwo) {
       }
     }
   });
-  return oneVotes > twoVotes? [combatantOne, combatantTwo] : [combatantTwo, combatantOne];
+  oneVotes >= twoVotes ? this.resolution(combatantOne, combatantTwo) : this.resolution(combatantTwo, combatantOne);
 };
+
+DanceFloor.prototype.resolution = function(winner, loser) {
+  $('.danceOff').text(winner.preferences[0].toUpperCase() + " WINS!!!!!");
+  $('.danceOff').css({color: 'orange'});
+  $('.danceOff').toggle("pulsate", 5000);
+  $(winner.$node).effect("scale", {percent:4000}, 4000);
+  $(loser.$node).effect("explode", {pieces:16}, 1500);
+  setTimeout(function(){location.reload()}, 3000);
+};
+
+
+
 
 
 

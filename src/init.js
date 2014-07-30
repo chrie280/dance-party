@@ -1,6 +1,7 @@
 $(document).ready(function(){
   window.dancers = [];
-  window.danceFloor = new TechnoFloor();
+  window.danceFloor = new DiscoFloor();
+  var constructors = ["Magee","Marcus","Fred","Phillip"];
 
   $(".danceOff").hide();
   $(".floorSelector").on("change", function(){
@@ -23,13 +24,8 @@ $(document).ready(function(){
      * A new object of the given type will be created and added
      * to the stage.
      */
-    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-
-    // get the maker function for the kind of dancer we're supposed to make
+    var dancerMakerFunctionName = constructors[Math.floor(Math.random() * constructors.length)];
     var dancerMakerFunction = window[dancerMakerFunctionName];
-
-    // make a dancer with a random position
-
     var dancer = new dancerMakerFunction(
       ($("body").height() * .85) * Math.random(),
       ($("body").width() * .85)* Math.random(),

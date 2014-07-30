@@ -2,6 +2,7 @@ var Marcus = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
   this.$node.attr('src', 'img/marcus.png');
   this.preferences = ['Marcus', 'Fred', 'Magee', 'Phillip'];
+  this.bustCount =1;
 };
 Marcus.prototype = Object.create(Dancer.prototype);
 Marcus.prototype.constructor = Marcus;

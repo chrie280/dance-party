@@ -12,8 +12,8 @@ TechnoFloor.prototype.constructor = TechnoFloor;
 
 
 
-//Brainstorming Dancefloor behavior modifications
-  //For all dancefloors:
-    //SplashScreen on Danceoff
-    //Different Music
-    //Color Overlay on new Dancers?
+//Winner Notification
+  //Death Effect
+  //Reset
+  //dance off music
+//Code cleanup

@@ -21,9 +21,7 @@ body, a:link, a:visited, a:active{
   background-color: #777;
 }
 .dancer{
-  /*max-height: 40%;*/
   display: inline;
-
 }
 .danceOff{
   color: gold;
